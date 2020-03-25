@@ -18,10 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by majiancheng on 2019/10/4.
@@ -66,6 +63,22 @@ public class BannerController {
         int saveCnt = bannerService.saveNotNull(bannerModel);
 
         return ResponseUtil.success();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public Result update(BannerModel bannerModel) {
+        int saveCnt = bannerService.updateNotNull(bannerModel);
+
+        return ResponseUtil.success();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    public Result get(@RequestParam("id")Integer id) {
+        BannerModel bannerModel = bannerService.findById(id);
+
+        return ResponseUtil.success(bannerModel);
     }
 
 }
